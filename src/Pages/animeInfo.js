@@ -34,7 +34,8 @@ export default function AnimeInfo() {
                 userCount: result.data.attributes.userCount,
                 startDate: result.data.attributes.startDate,
                 endDate: result.data.attributes.endDate,
-                img: result.data.attributes.posterImage.original,
+                img: result.data.attributes.
+                .original,
                 episodeLength: result.data.attributes.episodeLength,
                 popularityRank: result.data.attributes.popularityRank,
                 coverImage: result.data.attributes.coverImage.original,
