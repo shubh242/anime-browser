@@ -1,0 +1,11 @@
+.searchBar {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.displaytilecomponent {
+    top: 10%;
+    left: 10%;
+    width: 100%;
+}
