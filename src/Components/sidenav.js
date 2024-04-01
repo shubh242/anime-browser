@@ -115,7 +115,7 @@ export default function Sidenav({ searchString, updateSearchString }) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Link to={'/'} exact>
+                    <Link to={'/home'} exact>
                         <Button>
                             <Typography variant="h6" noWrap component="div">
                                 Home

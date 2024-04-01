@@ -20,7 +20,7 @@ function App() {
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <Routes>
-          <Route path='/' element={<Home />}></Route>
+          <Route path='/home' element={<Home />}></Route>
           <Route path='/anime/:id' element={<AnimeInfo />}></Route>
           <Route path='/anime/category/:categoryId' element={<Home />} ></Route>
         </Routes>
