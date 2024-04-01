@@ -15,6 +15,7 @@ export default function CategoriesComponent({updateCategoryData}) {
     }
 
     useEffect(() => {
+        // eslint-disable-next-line
         categoryData();
     }, []);
 

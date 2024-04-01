@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import SearchBar from "../Components/searchbar";
-import { Box, Button, Container, Grid, Typography, ButtonGroup } from "@mui/material";
+import { Box, Button, Grid, Typography, ButtonGroup } from "@mui/material";
 import BookmarkAddSharpIcon from '@mui/icons-material/BookmarkAddSharp';
 import BookmarkAddedSharpIcon from '@mui/icons-material/BookmarkAddedSharp';
 import Sidenav from "../Components/sidenav";
@@ -34,8 +33,7 @@ export default function AnimeInfo() {
                 userCount: result.data.attributes.userCount,
                 startDate: result.data.attributes.startDate,
                 endDate: result.data.attributes.endDate,
-                img: result.data.attributes.
-                .original,
+                img: result.data.attributes.posterImage.original,
                 episodeLength: result.data.attributes.episodeLength,
                 popularityRank: result.data.attributes.popularityRank,
                 coverImage: result.data.attributes.coverImage.original,
@@ -44,7 +42,9 @@ export default function AnimeInfo() {
             console.error(error);
         }
     };
+
     useEffect(() => {
+        // eslint-disable-next-line
         data();
     }, [searchString]);
 
