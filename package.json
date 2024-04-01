@@ -1,7 +1,6 @@
 {
   "name": "animeapp",
   "version": "0.1.0",
-  "homepage": "http://shubh242.github.io/anime-browser/home",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -21,8 +20,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
