@@ -10,6 +10,8 @@
 
 # production
 /build
+/.codesandbox
+/.devcontainer
 
 # misc
 .DS_Store
