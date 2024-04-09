@@ -1,167 +1,193 @@
-import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
-import { Button, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import MenuIcon from '@mui/icons-material/Menu';
-import TrendingUpOutlinedIcon from '@mui/icons-material/TrendingUpOutlined';
-import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import SearchBar from './searchbar';
+import * as React from "react";
+import { styled, useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import MuiDrawer from "@mui/material/Drawer";
+import MuiAppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import CssBaseline from "@mui/material/CssBaseline";
+import Typography from "@mui/material/Typography";
+import {
+  Button,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import MenuIcon from "@mui/icons-material/Menu";
+import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import SearchBar from "./searchbar";
 
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-    }),
-    overflowX: 'hidden',
+  width: drawerWidth,
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: "hidden",
 });
 
 const closedMixin = (theme) => ({
-    transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: `calc(${theme.spacing(7)} + 1px)`,
-    [theme.breakpoints.up('sm')]: {
-        width: `calc(${theme.spacing(8)} + 1px)`,
-    },
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: "hidden",
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up("sm")]: {
+    width: `calc(${theme.spacing(8)} + 1px)`,
+  },
 });
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
 }));
 
 const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(["width", "margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
     }),
-    ...(open && {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    }),
+  }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        width: drawerWidth,
-        flexShrink: 0,
-        whiteSpace: 'nowrap',
-        boxSizing: 'border-box',
-        ...(open && {
-            ...openedMixin(theme),
-            '& .MuiDrawer-paper': openedMixin(theme),
-        }),
-        ...(!open && {
-            ...closedMixin(theme),
-            '& .MuiDrawer-paper': closedMixin(theme),
-        }),
-    }),
-);
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  width: drawerWidth,
+  flexShrink: 0,
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
+  ...(open && {
+    ...openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme),
+  }),
+  ...(!open && {
+    ...closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme),
+  }),
+}));
 
 export default function Sidenav({ searchString, updateSearchString }) {
-    const theme = useTheme();
-    const [open, setOpen] = useState(false);
+  const theme = useTheme();
+  const [open, setOpen] = useState(false);
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
 
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
-    const menu = [<TrendingUpOutlinedIcon />, <VisibilityOutlinedIcon />, <LibraryBooksIcon />];
+  const menu = [
+    <TrendingUpOutlinedIcon />,
+    <VisibilityOutlinedIcon />,
+    <LibraryBooksIcon />,
+  ];
+  const manuLinks = ["", "mostviewed", "genre"];
 
-    return (
-        <Box sx={{ display: 'flex' }} color="inherit">
-            <CssBaseline />
-            <AppBar position="fixed" open={open}>
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        sx={{
-                            marginRight: 5,
-                            ...(open && { display: 'none' }),
-                        }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Link to={'/'} exact>
-                        <Button>
-                            <Typography variant="h6" noWrap component="div">
-                                Home
-                            </Typography>
-                        </Button>
-                    </Link>
-                    <SearchBar searchString={searchString} updateSearchString={updateSearchString} />
-                </Toolbar>
-            </AppBar>
-            <Drawer variant="permanent" open={open}>
-                <DrawerHeader>
-                    <Typography variant="h6" noWrap component="div" sx={{ left: "100%", flex: "auto" }}>
-                        Menu
-                    </Typography>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                    </IconButton>
-                </DrawerHeader>
-                <Divider />
-                <List>
-                    {['Trending', 'Most Viewed', 'Genre'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        justifyContent: 'center',
-                                        margin: 'auto'
-                                    }}
-                                >
-                                    {
-                                        menu[index]
-                                    }
-                                </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
-        </Box>
-    );
+  return (
+    <Box sx={{ display: "flex" }} color="inherit">
+      <CssBaseline />
+      <AppBar position="fixed" open={open}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: "none" }),
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Link to={"/"} exact>
+            <Button>
+              <Typography variant="h6" noWrap component="div">
+                Home
+              </Typography>
+            </Button>
+          </Link>
+          <SearchBar
+            searchString={searchString}
+            updateSearchString={updateSearchString}
+          />
+        </Toolbar>
+      </AppBar>
+      <Drawer variant="permanent" open={open}>
+        <DrawerHeader>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ left: "100%", flex: "auto" }}
+          >
+            Menu
+          </Typography>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "rtl" ? (
+              <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        <List>
+          {["Trending", "Most Viewed", "Genre"].map((text, index) => (
+            <Link to={`anime/${manuLinks[index]}`}>
+              <ListItem key={text} disablePadding sx={{ display: "block" }}>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      justifyContent: "center",
+                      margin: "auto",
+                    }}
+                  >
+                    {menu[index]}
+                  </ListItemIcon>
+                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+      </Drawer>
+    </Box>
+  );
 }
