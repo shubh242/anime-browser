@@ -115,33 +115,35 @@ export default function Sidenav({ searchString, updateSearchString }) {
   return (
     <Box sx={{ display: "flex" }} color="inherit">
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: "none" }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Link to={"/"} exact>
-            <Button>
-              <Typography variant="h6" noWrap component="div">
-                Home
-              </Typography>
-            </Button>
-          </Link>
-          <SearchBar
-            searchString={searchString}
-            updateSearchString={updateSearchString}
-          />
-        </Toolbar>
-      </AppBar>
+      <div>
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                marginRight: 5,
+                ...(open && { display: "none" }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Link to={"/"} exact>
+              <Button>
+                <Typography variant="h6" noWrap component="div">
+                  Home
+                </Typography>
+              </Button>
+            </Link>
+            <SearchBar
+              searchString={searchString}
+              updateSearchString={updateSearchString}
+            />
+          </Toolbar>
+        </AppBar>
+      </div>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <Typography

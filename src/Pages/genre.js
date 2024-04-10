@@ -4,9 +4,11 @@ import {
   ButtonGroup,
   CircularProgress,
   Grid,
+  Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Sidenav from "../Components/sidenav";
 
 export default function GenreComponent() {
   const [spinner, setSpinner] = useState(false);
@@ -24,46 +26,69 @@ export default function GenreComponent() {
       categories.push(...result.data);
       offset = offset + 20;
     }
+    let mappedArray = categorization(categories);
+    setDisplayData({ data: [mappedArray] });
+    setSpinner(true);
+  };
+
+  const categorization = (categories) => {
     let pastAlpha = "";
     let tempArray = [];
     let mappingArray = new Map();
     categories.forEach((data) => {
-      // console.log(data);
       tempArray = [data];
       if (pastAlpha === data.attributes.title[0]) {
         mappingArray.get(pastAlpha).push(data);
       } else {
         pastAlpha = data.attributes.title[0];
         mappingArray.set(pastAlpha, tempArray);
-        // console.log(mappingArray);
       }
     });
-    console.log(mappingArray);
-    setDisplayData({ data: [mappingArray] });
-    setSpinner(true);
+    return mappingArray;
   };
 
   useEffect(() => {
     if (!spinner) {
       fetchCategories();
-    } else {
-      console.log(displayData);
     }
   }, [spinner]);
 
   return (
-    <div>
+    <div style={{ marginTop: "60px" }}>
+      <Sidenav />
       {spinner ? (
-        new Array(displayData).map((data) => {
-          return (
-            <div>
-              <h1>{data.attributes}</h1>
-            </div>
-          );
-        })
+        <>
+          <Grid container spacing={1}>
+            {[...displayData.data[0].keys()].map((keys, index) => {
+              return (
+                <>
+                  <Grid item xs={6}>
+                    <Typography variant="h2">{keys}</Typography>
+                    {displayData.data[0].get(keys).map((data) => {
+                      return (
+                        <>
+                          <Typography variant="subtitle1">
+                            {data.attributes.title}
+                          </Typography>
+                        </>
+                      );
+                    })}
+                  </Grid>
+                </>
+              );
+            })}
+          </Grid>
+        </>
       ) : (
         // <div></div>
-        <CircularProgress />
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+        >
+          <CircularProgress />
+        </Box>
       )}
     </div>
   );
