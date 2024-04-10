@@ -23,11 +23,23 @@ export default function GenreComponent() {
       result = await result.json();
       categories.push(...result.data);
       offset = offset + 20;
-      console.log(offset);
     }
-    console.log("exiting fetchcate");
-    setDisplayData({ data: categories });
-    console.log("Displaying Data");
+    let pastAlpha = "";
+    let tempArray = [];
+    let mappingArray = new Map();
+    categories.forEach((data) => {
+      // console.log(data);
+      tempArray = [data];
+      if (pastAlpha === data.attributes.title[0]) {
+        mappingArray.get(pastAlpha).push(data);
+      } else {
+        pastAlpha = data.attributes.title[0];
+        mappingArray.set(pastAlpha, tempArray);
+        // console.log(mappingArray);
+      }
+    });
+    console.log(mappingArray);
+    setDisplayData({ data: [mappingArray] });
     setSpinner(true);
   };
 
@@ -35,21 +47,22 @@ export default function GenreComponent() {
     if (!spinner) {
       fetchCategories();
     } else {
-      setDisplayData([...displayData.data]);
+      console.log(displayData);
     }
   }, [spinner]);
 
   return (
     <div>
       {spinner ? (
-        displayData.data.map((data) => {
+        new Array(displayData).map((data) => {
           return (
-            <div key={data.id}>
-              <h1 style={{ color: "white" }}>{data}</h1>
+            <div>
+              <h1>{data.attributes}</h1>
             </div>
           );
         })
       ) : (
+        // <div></div>
         <CircularProgress />
       )}
     </div>
