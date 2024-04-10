@@ -4,6 +4,7 @@ import {
   ButtonGroup,
   CircularProgress,
   Grid,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -62,14 +63,27 @@ export default function GenreComponent() {
             {[...displayData.data[0].keys()].map((keys, index) => {
               return (
                 <>
+                  <Typography gutterBottom variant="h4" sx={{ margin: "auto" }}>
+                    Anime Categories
+                  </Typography>
                   <Grid item xs={6}>
                     <Typography variant="h2">{keys}</Typography>
                     {displayData.data[0].get(keys).map((data) => {
                       return (
                         <>
-                          <Typography variant="subtitle1">
-                            {data.attributes.title}
-                          </Typography>
+                          <Link
+                            to={`/anime/category/${data.id}`}
+                            style={{ textDecoration: "none", color: "white" }}
+                          >
+                            <Tooltip
+                              title={data.attributes.description}
+                              placement="top-end"
+                            >
+                              <Typography variant="subtitle1">
+                                <Button>{data.attributes.title}</Button>
+                              </Typography>
+                            </Tooltip>
+                          </Link>
                         </>
                       );
                     })}

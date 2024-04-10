@@ -164,8 +164,11 @@ export default function Sidenav({ searchString, updateSearchString }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Trending", "Most Viewed", "Genre"].map((text, index) => (
-            <Link to={`anime/${manuLinks[index]}`}>
+          {["Trending", "Most Viewed", "Categories"].map((text, index) => (
+            <Link
+              to={`/anime/${manuLinks[index]}`}
+              style={{ textDecoration: "none", color: "white" }}
+            >
               <ListItem key={text} disablePadding sx={{ display: "block" }}>
                 <ListItemButton
                   sx={{
