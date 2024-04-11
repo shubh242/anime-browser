@@ -168,8 +168,9 @@ export default function Sidenav({ searchString, updateSearchString }) {
             <Link
               to={`/anime/${manuLinks[index]}`}
               style={{ textDecoration: "none", color: "white" }}
+              key={text}
             >
-              <ListItem key={text} disablePadding sx={{ display: "block" }}>
+              <ListItem disablePadding sx={{ display: "block" }}>
                 <ListItemButton
                   sx={{
                     minHeight: 48,

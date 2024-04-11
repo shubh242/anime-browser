@@ -6,16 +6,10 @@ import { Box } from "@mui/material";
 
 export default function Home() {
   const [searchString, setSearchString] = useState("");
-  const [animeCollection, setAnimeCollection] = useState([]);
+  const PAGE = "Home";
 
   const updateSearchString = (inputString) => {
     setSearchString(inputString);
-  };
-
-  const updateAnimeCollection = (collection) => {
-    setAnimeCollection([...animeCollection, collection.animeFetchData], () => {
-      console.log(animeCollection);
-    });
   };
 
   return (
@@ -27,9 +21,8 @@ export default function Home() {
       <Box component="main" sx={{ marginTop: 10, marginLeft: 10 }}>
         <DisplayTileComponent
           searchString={searchString}
-          animeCollection={animeCollection}
-          updateAnimeCollection={updateAnimeCollection}
           updateSearchString={updateSearchString}
+          PAGE={PAGE}
         />
       </Box>
     </div>

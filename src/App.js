@@ -6,6 +6,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MostViewedComponent from "./Pages/mostviewd";
 import GenreComponent from "./Pages/genre";
+import CategoriesPage from "./Pages/categoriesPage";
 
 let darkMode = true;
 
@@ -28,7 +29,10 @@ function App() {
             element={<MostViewedComponent />}
           ></Route>
           <Route path="/anime/genre" element={<GenreComponent />}></Route>
-          <Route path="/anime/category/:categoryId" element={<Home />}></Route>
+          <Route
+            path="/anime/category/:categoryId"
+            element={<CategoriesPage />}
+          ></Route>
         </Routes>
       </ThemeProvider>
     </div>

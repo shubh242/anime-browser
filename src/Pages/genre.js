@@ -60,13 +60,13 @@ export default function GenreComponent() {
       {spinner ? (
         <>
           <Grid container spacing={1}>
-            {[...displayData.data[0].keys()].map((keys, index) => {
+            {[...displayData.data[0].keys()].map((keys) => {
               return (
                 <>
                   <Typography gutterBottom variant="h4" sx={{ margin: "auto" }}>
                     Anime Categories
                   </Typography>
-                  <Grid item xs={6}>
+                  <Grid item xs={6} key={keys}>
                     <Typography variant="h2">{keys}</Typography>
                     {displayData.data[0].get(keys).map((data) => {
                       return (
@@ -74,6 +74,7 @@ export default function GenreComponent() {
                           <Link
                             to={`/anime/category/${data.id}`}
                             style={{ textDecoration: "none", color: "white" }}
+                            key={data.id}
                           >
                             <Tooltip
                               title={data.attributes.description}
