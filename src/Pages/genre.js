@@ -59,31 +59,31 @@ export default function GenreComponent() {
       <Sidenav />
       {spinner ? (
         <>
+          <Typography gutterBottom variant="h4" sx={{ margin: "auto" }}>
+            Anime Categories
+          </Typography>
           <Grid container spacing={1}>
             {[...displayData.data[0].keys()].map((keys) => {
               return (
                 <>
-                  <Typography gutterBottom variant="h4" sx={{ margin: "auto" }}>
-                    Anime Categories
-                  </Typography>
                   <Grid item xs={6} key={keys}>
                     <Typography variant="h2">{keys}</Typography>
                     {displayData.data[0].get(keys).map((data) => {
                       return (
                         <>
                           <Link
-                            to={`/anime/category/${data.id}`}
+                            to={`/anime/category/${data.attributes.title}`}
                             style={{ textDecoration: "none", color: "white" }}
                             key={data.id}
                           >
-                            <Tooltip
-                              title={data.attributes.description}
-                              placement="top-end"
-                            >
-                              <Typography variant="subtitle1">
+                            <Typography variant="subtitle1">
+                              <Tooltip
+                                title={data.attributes.description}
+                                placement="top-end"
+                              >
                                 <Button>{data.attributes.title}</Button>
-                              </Typography>
-                            </Tooltip>
+                              </Tooltip>
+                            </Typography>
                           </Link>
                         </>
                       );

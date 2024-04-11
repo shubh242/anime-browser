@@ -26,7 +26,10 @@ export default function AnimeInfo() {
       console.log(result.data);
       setAnimeData({
         id: result.data.id,
-        title: result.data.attributes.titles.en,
+        title:
+          result.data.attributes.titles.en === undefined
+            ? result.data.attributes.titles.en_jp
+            : result.data.attributes.titles.en,
         type: result.datatype,
         description: result.data.attributes.description,
         averageRating: result.data.attributes.averageRating,
@@ -48,6 +51,7 @@ export default function AnimeInfo() {
   useEffect(() => {
     // eslint-disable-next-line
     data();
+    console.log(animeData);
   }, [searchString]);
 
   const handleBookmarkClick = (e, id, variant) => {
@@ -93,13 +97,14 @@ export default function AnimeInfo() {
                   src={`${animeData.img}`}
                   alt={animeData.title}
                   style={{
+                    width: "270px",
                     height: "380px",
                     border: "solid gray",
                     marginLeft: "-80px",
                   }}
                 />
               </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={8} alignContent="center">
                 <Typography variant="h3">{animeData.title}</Typography>
                 <Typography variant="body1">{animeData.description}</Typography>
               </Grid>

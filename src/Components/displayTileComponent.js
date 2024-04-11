@@ -76,10 +76,10 @@ export default function DisplayTileComponent({
   }
 
   async function displayCategories() {
-    console.log(categoryData && searchString === "");
-    console.log(params);
-    if (categoryData && searchString === "") {
-      const url = `https://kitsu.io/api/edge/anime?filter[categories]=${categoryData}&sort=-favoritesCount&page[limit]=20&page[offset]=20`;
+    console.log(categoryData, searchString === "");
+    console.log(params.title);
+    if (params.title && searchString === "") {
+      const url = `https://kitsu.io/api/edge/anime?filter[categories]=${params.title}&sort=-favoritesCount&page[limit]=20&page[offset]=20`;
       const response = await fetch(url);
       const result = await response.json();
       const animeFetchData = result.data.map((anime) => {
@@ -134,7 +134,11 @@ export default function DisplayTileComponent({
           </Typography>
         </>
       ) : (
-        <></>
+        <>
+          <Typography gutterBottom variant="h4" sx={{ margin: "auto" }}>
+            {params.title} Category
+          </Typography>
+        </>
       )}
       <Grid
         container

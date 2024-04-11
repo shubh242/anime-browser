@@ -32,7 +32,7 @@ export default function CategoriesComponent({ updateCategoryData }) {
         {categories.map((category) => {
           return (
             <div key={category.id}>
-              <Link to={`/anime/category/${category.id}`}>
+              <Link to={`/anime/category/${category.attributes.title}`}>
                 <Button
                   onClick={(event) =>
                     handleClick(event, category.attributes.title)

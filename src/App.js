@@ -30,7 +30,7 @@ function App() {
           ></Route>
           <Route path="/anime/genre" element={<GenreComponent />}></Route>
           <Route
-            path="/anime/category/:categoryId"
+            path="/anime/category/:title"
             element={<CategoriesPage />}
           ></Route>
         </Routes>
